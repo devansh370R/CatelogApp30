@@ -9,10 +9,9 @@ class HomePage extends StatelessWidget {
     const String name = "Devansh";
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text(
+        title: const Text(
           "My Application",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
         ),
       ),
       drawer: Drawer(),
