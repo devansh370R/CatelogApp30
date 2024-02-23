@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_30days/utiles/myRoutes.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -12,11 +12,28 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool changeButton = false;
+  final _formKey = GlobalKey<FormState>();
+
+  moveToHome(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        changeButton = true;
+      });
+      await Future.delayed(Duration(seconds: 1));
+      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      setState(() {
+        changeButton = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Colors.white,
-        child: SingleChildScrollView(
+      color: Colors.white,
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
           child: Column(
             children: [
               Image.asset(
@@ -39,6 +56,12 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Username cannot be Empty";
+                        }
+                        return null;
+                      },
                       onChanged: (value) {
                         name = value;
                         setState(() {});
@@ -49,6 +72,14 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Password cannot be Empty";
+                        } else if (value.length < 6) {
+                          return "Password length must be 6 characters";
+                        }
+                        return null;
+                      },
                       obscureText: true,
                       decoration: const InputDecoration(
                         hintText: "Enter your Password.",
@@ -58,55 +89,40 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 20.00,
                     ),
-                    InkWell(
-                      onTap: () async {
-                        setState(() {
-                          changeButton = true;
-                        });
-                        await Future.delayed(Duration(seconds: 1));
-                        Navigator.pushNamed(context, MyRoutes.homeRoute);
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(seconds: 1),
-                        width: changeButton ? 50 : 150,
-                        height: 50,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          // shape: changeButton
-                          //     ? BoxShape.circle
-                          //     : BoxShape.rectangle,
-                          color: Colors.deepPurple,
-                          borderRadius:
-                              BorderRadius.circular(changeButton ? 50 : 10),
+                    Material(
+                      color: Colors.deepPurple,
+                      borderRadius:
+                          BorderRadius.circular(changeButton ? 50 : 10),
+                      child: InkWell(
+                        splashColor: Colors.red,
+                        onTap: () async {
+                          moveToHome(context);
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(seconds: 1),
+                          width: changeButton ? 50 : 150,
+                          height: 50,
+                          alignment: Alignment.center,
+                          child: changeButton
+                              ? const Icon(
+                                  Icons.done,
+                                  color: Colors.white,
+                                )
+                              : const Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                ),
                         ),
-                        child: changeButton
-                            ? const Icon(
-                                Icons.done,
-                                color: Colors.white,
-                              )
-                            : const Text(
-                                "Login",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              ),
                       ),
                     ),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     Navigator.pushNamed(context, MyRoutes.homeRoute);
-                    //   },
-                    //   style: ElevatedButton.styleFrom(
-                    //       backgroundColor: Colors.blue),
-                    //   child: const Text(
-                    //     "Login",
-                    //     style: TextStyle(color: Colors.white),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
