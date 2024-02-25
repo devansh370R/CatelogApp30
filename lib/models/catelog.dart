@@ -1,21 +1,27 @@
-class Item {
+class ItemClass {
   final num id;
   final String name;
+  final String desc;
   final num price;
   final String url;
 
-  Item(
+  ItemClass(
       {required this.id,
       required this.name,
+      required this.desc,
       required this.price,
       required this.url});
 }
 
-final Products = [
-  Item(
-      id: 1001,
-      name: "Samsung Mobile",
-      price: 30000,
-      url:
-          "http://c2c.sulekhalive.com/lcproducts/mobiles/images/samsung/album/large/samsung-z3(2).jpg"),
-];
+class CatelogModel {
+  // ignore: non_constant_identifier_names
+  static final Items = [
+    ItemClass(
+        id: 1001,
+        name: "Samsung Mobile",
+        desc: "High-performance Samsung mobile with advanced features.",
+        price: 30000,
+        url:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb7M3IzK1MqEKG-_7XVR0gXhMe85u99O6xi6ww0w34N6REFveYcbKM3935Ap_yPNVgwF0&usqp=CAU"),
+  ];
+}
