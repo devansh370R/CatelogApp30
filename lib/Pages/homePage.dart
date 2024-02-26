@@ -47,17 +47,37 @@ class _HomePageState extends State<HomePage> {
         ),
         drawer: const MyDrawer(),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return ItemWidget(
-                // item: CatelogModel.Items[index],
-                item: CatelogModel.items[index],
-              );
-            },
-            // itemCount: //CatelogModel.Items.length,
-            itemCount: CatelogModel.items.length,
-          ),
-        ));
+            padding: const EdgeInsets.all(16.0),
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 16),
+              itemBuilder: (context, index) {
+                final item = CatelogModel.items[index];
+                return Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0)),
+                    child: GridTile(
+                      child: Image.network(item.url),
+                      header: Container(
+                        child: Text(
+                          item.name,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(color: Colors.blue),
+                      ),
+                      footer: Container(
+                        child: Text(
+                          item.price.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(color: Colors.black),
+                      ),
+                    ));
+              },
+              itemCount: CatelogModel.items.length,
+            )));
   }
 }
