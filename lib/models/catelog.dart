@@ -31,12 +31,12 @@ class ItemClass {
 class CatelogModel {
   // ignore: non_constant_identifier_names
   static List<ItemClass> items = [
-    ItemClass(
-        id: 1001,
-        name: "Samsung Mobile",
-        desc: "High-performance Samsung mobile with advanced features.",
-        price: 30000,
-        url:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb7M3IzK1MqEKG-_7XVR0gXhMe85u99O6xi6ww0w34N6REFveYcbKM3935Ap_yPNVgwF0&usqp=CAU"),
+    // ItemClass(
+    // id: 1001,
+    // name: "Samsung Mobile",
+    // desc: "High-performance Samsung mobile with advanced features.",
+    // price: 30000,
+    // url:
+    //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb7M3IzK1MqEKG-_7XVR0gXhMe85u99O6xi6ww0w34N6REFveYcbKM3935Ap_yPNVgwF0&usqp=CAU"),
   ];
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_30days/Pages/homeDetailPage.dart';
 import 'package:flutter_30days/Pages/homePage.dart';
 import 'package:flutter_30days/Pages/loginPage.dart';
 import 'package:flutter_30days/utiles/myRoutes.dart';

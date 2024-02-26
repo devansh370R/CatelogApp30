@@ -3,9 +3,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_30days/Pages/homeDetailPage.dart';
 import 'package:flutter_30days/models/catelog.dart';
 import 'package:flutter_30days/widgets/ItemWidget.dart';
 import 'package:flutter_30days/widgets/drawer.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,55 +31,145 @@ class _HomePageState extends State<HomePage> {
         await rootBundle.loadString("assets/files/MobileData.json");
     final jsonDecodedData = jsonDecode(MobileData);
     var productsData = jsonDecodedData["mobiles"];
-    CatelogModel.items = List.from(productsData)
+    List<ItemClass> items = List.from(productsData)
         .map<ItemClass>((item) => ItemClass.fromMap(item))
         .cast<ItemClass>()
         .toList();
-    setState(() {});
+    // CatelogModel.items = List.from(productsData)
+    //     .map<ItemClass>((item) => ItemClass.fromMap(item))
+    //     .cast<ItemClass>()
+    //     .toList();
+    setState(() {
+      CatelogModel.items = items;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "My Application",
-            style: TextStyle(color: Colors.black),
+      backgroundColor: Colors.grey[100],
+      body: SafeArea(
+        child: Container(
+          padding: Vx.m32,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CatalogHeader(),
+              if (CatelogModel.items != null && CatelogModel.items.isNotEmpty)
+                const CatelogList().p16().expand()
+              else
+                CircularProgressIndicator().centered().expand()
+            ],
           ),
         ),
-        drawer: const MyDrawer(),
-        body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 16),
-              itemBuilder: (context, index) {
-                final item = CatelogModel.items[index];
-                return Card(
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: GridTile(
-                      child: Image.network(item.url),
-                      header: Container(
-                        child: Text(
-                          item.name,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(color: Colors.blue),
-                      ),
-                      footer: Container(
-                        child: Text(
-                          item.price.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        padding: EdgeInsets.all(12),
-                        decoration: BoxDecoration(color: Colors.black),
-                      ),
-                    ));
-              },
-              itemCount: CatelogModel.items.length,
-            )));
+      ),
+    );
+  }
+}
+
+class CatalogHeader extends StatelessWidget {
+  const CatalogHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        "Catalog App"
+            .text
+            .xl5
+            .bold
+            .color(const Color.fromARGB(255, 15, 17, 19))
+            .make(),
+        "Trending Products".text.xl2.color(Colors.grey).make()
+      ],
+    );
+  }
+}
+
+class CatelogList extends StatelessWidget {
+  const CatelogList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final catelog = CatelogModel.items[index];
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeDetailPage(catelog: catelog),
+                ));
+          },
+          child: CatelogItem(
+            catelog: catelog,
+          ),
+        );
+      },
+      itemCount: CatelogModel.items.length,
+    );
+  }
+}
+
+class CatelogItem extends StatelessWidget {
+  const CatelogItem({super.key, required this.catelog});
+
+  final ItemClass catelog;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: VxBox(
+          child: Row(
+        children: [
+          Hero(
+              tag: Key(catelog.id.toString()),
+              child: CatelogImage(image: catelog.url)),
+          Expanded(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              catelog.name.text.bold.lg.make(),
+              catelog.desc.text.textStyle(context.captionStyle).make(),
+              10.heightBox,
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  "\$${catelog.price}".text.bold.xl.make(),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color.fromARGB(255, 82, 80, 80))),
+                      onPressed: () {},
+                      child: "Buy".text.color(Colors.white).make())
+                ],
+              )
+            ],
+          ))
+        ],
+      )).color(Colors.white).roundedLg.square(150).py16.make(),
+    );
+  }
+}
+
+class CatelogImage extends StatelessWidget {
+  final String image;
+  const CatelogImage({super.key, required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.network(image)
+        .box
+        .roundedLg
+        .p8
+        .color(Colors.grey[100]!)
+        .make()
+        .p16()
+        .w40(context);
   }
 }
