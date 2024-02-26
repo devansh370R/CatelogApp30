@@ -11,11 +11,26 @@ class ItemClass {
       required this.desc,
       required this.price,
       required this.url});
+
+  factory ItemClass.fromMap(Map<dynamic, dynamic> map) => ItemClass(
+        id: map["id"],
+        name: map["name"],
+        desc: map["description"],
+        price: map["price"],
+        url: map["url"],
+      );
+  toMap() => {
+        "id": id,
+        "name": name,
+        "description": desc,
+        "price": price,
+        "url": url,
+      };
 }
 
 class CatelogModel {
   // ignore: non_constant_identifier_names
-  static final Items = [
+  static List<ItemClass> items = [
     ItemClass(
         id: 1001,
         name: "Samsung Mobile",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_30days/models/catelog.dart';
 
 class ItemWidget extends StatelessWidget {
@@ -13,8 +14,10 @@ class ItemWidget extends StatelessWidget {
         onTap: () {
           print("${item.name} pressed");
         },
-        leading: Image.network(
-          item.url,
+        leading: CachedNetworkImage(
+          imageUrl: item.url,
+          placeholder: (context, url) => const CircularProgressIndicator(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
           fit: BoxFit.cover,
         ),
         title: Text(item.name),
@@ -22,8 +25,8 @@ class ItemWidget extends StatelessWidget {
         trailing: Text(
           "\$${item.price.toString()}",
           textScaleFactor: 1.5,
-          style:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
+          style: const TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.deepPurple),
         ),
       ),
     );
