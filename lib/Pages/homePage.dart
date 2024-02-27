@@ -1,10 +1,12 @@
 // ignore: file_names
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_30days/Pages/homeDetailPage.dart';
 import 'package:flutter_30days/models/catelog.dart';
+import 'package:flutter_30days/utiles/myRoutes.dart';
 import 'package:flutter_30days/widgets/ItemWidget.dart';
 import 'package:flutter_30days/widgets/drawer.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -47,10 +49,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, MyRoutes.cartPageRoute);
+        },
+        backgroundColor: Color.fromARGB(255, 15, 17, 19),
+        child: Icon(
+          CupertinoIcons.cart,
+          color: Colors.white,
+        ),
+      ),
       backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: Container(
-          padding: Vx.m32,
+          padding: Vx.m24,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -146,13 +158,13 @@ class CatelogItem extends StatelessWidget {
                           backgroundColor: MaterialStateProperty.all(
                               const Color.fromARGB(255, 82, 80, 80))),
                       onPressed: () {},
-                      child: "Buy".text.color(Colors.white).make())
+                      child: "Add To Cart".text.color(Colors.white).make())
                 ],
               )
             ],
           ))
         ],
-      )).color(Colors.white).roundedLg.square(150).py16.make(),
+      )).color(Colors.white).roundedLg.square(150).py12.make(),
     );
   }
 }

@@ -10,7 +10,9 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       bottomNavigationBar: ButtonBar(
         alignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -29,6 +31,7 @@ class HomeDetailPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
+              // backgroundColor(Colors.grey),
               Hero(
                 child: Image.network(catelog.url),
                 tag: Key(catelog.id.toString()),
@@ -46,6 +49,11 @@ class HomeDetailPage extends StatelessWidget {
                       catelog.name.text.bold.xl3.make(),
                       catelog.desc.text.textStyle(context.captionStyle).make(),
                       10.heightBox,
+                      "Apple mobile devices, such as the iPhone and iPad, are known for their premium design, seamless integration, and user-friendly experience. Powered by the iOS operating system, these devices feature a high-performance A-series chip, advanced camera systems, and biometric authentication (Touch ID or Face ID). Apple's commitment to accessibility, sustainability, and constant innovation makes their mobile devices a popular choice for a comprehensive and cohesive digital experience."
+                          .text
+                          .textStyle(context.captionStyle)
+                          .make()
+                          .p16()
                     ],
                   ).py32(),
                 ),
