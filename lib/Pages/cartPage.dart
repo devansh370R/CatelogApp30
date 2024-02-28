@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_30days/models/cart.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
 
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,20 +71,25 @@ class __CartListState extends State<_CartList> {
   @override
   Widget build(BuildContext context) {
     final cartItems = _cart.items;
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        final cartItems = _cart.items.toList();
-        return ListTile(
-          title: cartItems[index].name.text.make(),
-          leading: Icon(Icons.done),
-          trailing: IconButton(
-            icon: Icon(Icons.remove_circle_outline_outlined),
-            onPressed: () {},
-          ),
-        );
-      },
-      itemCount: _cart.items?.length ?? 0,
-    );
+    return _cart.items.isEmpty
+        ? "Nothing To Show".text.xl3.makeCentered()
+        : ListView.builder(
+            itemBuilder: (context, index) {
+              final cartItems = _cart.items.toList();
+              return ListTile(
+                title: cartItems[index].name.text.make(),
+                leading: Icon(Icons.done),
+                trailing: IconButton(
+                  icon: Icon(Icons.remove_circle_outline_outlined),
+                  onPressed: () {
+                    _cart.remove(_cart.items.elementAt(index));
+                    setState(() {});
+                  },
+                ),
+              );
+            },
+            itemCount: _cart.items?.length ?? 0,
+          );
     // return ListView.builder(
     //   itemBuilder: (context, index) {
     //     final cartItems = _cart.items.toList();
