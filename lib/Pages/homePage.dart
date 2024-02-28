@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_30days/Pages/homeDetailPage.dart';
+import 'package:flutter_30days/models/cart.dart';
 import 'package:flutter_30days/models/catelog.dart';
 import 'package:flutter_30days/utiles/myRoutes.dart';
 import 'package:flutter_30days/widgets/ItemWidget.dart';
@@ -153,12 +154,7 @@ class CatelogItem extends StatelessWidget {
                 alignment: MainAxisAlignment.spaceBetween,
                 children: [
                   "\$${catelog.price}".text.bold.xl.make(),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 82, 80, 80))),
-                      onPressed: () {},
-                      child: "Add To Cart".text.color(Colors.white).make())
+                  _AddToCart(catelog: catelog)
                 ],
               )
             ],
@@ -166,6 +162,44 @@ class CatelogItem extends StatelessWidget {
         ],
       )).color(Colors.white).roundedLg.square(150).py12.make(),
     );
+  }
+}
+
+class _AddToCart extends StatefulWidget {
+  final ItemClass catelog;
+  const _AddToCart({
+    required this.catelog,
+    super.key,
+  });
+
+  @override
+  State<_AddToCart> createState() => _AddToCartState();
+}
+
+class _AddToCartState extends State<_AddToCart> {
+  final _cart = CartModel();
+
+  @override
+  Widget build(BuildContext context) {
+    bool isInCart = _cart.items.contains(widget.catelog) ?? false;
+    return ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(
+                const Color.fromARGB(255, 82, 80, 80))),
+        onPressed: () {
+          isInCart = isInCart.toggle();
+          final _catelog = CatelogModel();
+          final _cart = CartModel();
+          _cart.catelog = _catelog;
+          _cart.add(widget.catelog);
+          setState(() {});
+        },
+        child: isInCart
+            ? const Icon(
+                Icons.done,
+                color: Colors.white,
+              )
+            : "Add To Cart".text.color(Colors.white).make());
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_30days/models/cart.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CartPage extends StatelessWidget {
@@ -28,12 +29,13 @@ class _CartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = CartModel();
     return SizedBox(
       height: 200,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$${9999}".text.xl4.make(),
+          "\$${_cart.totalPrice}".text.xl4.make(),
           30.widthBox,
           ElevatedButton(
             onPressed: () {
@@ -59,20 +61,38 @@ class _CartList extends StatefulWidget {
 }
 
 class __CartListState extends State<_CartList> {
+  final _cart = CartModel();
+
   @override
   Widget build(BuildContext context) {
+    final cartItems = _cart.items;
     return ListView.builder(
       itemBuilder: (context, index) {
-        ListTile(
-          leading: const Icon(Icons.done),
+        final cartItems = _cart.items.toList();
+        return ListTile(
+          title: cartItems[index].name.text.make(),
+          leading: Icon(Icons.done),
           trailing: IconButton(
-            icon: const Icon(Icons.remove_circle_outline),
+            icon: Icon(Icons.remove_circle_outline_outlined),
             onPressed: () {},
           ),
-          title: "Item 1".text.make(),
         );
       },
-      itemCount: 5,
+      itemCount: _cart.items?.length ?? 0,
     );
+    // return ListView.builder(
+    //   itemBuilder: (context, index) {
+    //     final cartItems = _cart.items.toList();
+    //     return ListTile(
+    //       leading: const Icon(Icons.done),
+    //       trailing: IconButton(
+    //         icon: const Icon(Icons.remove_circle_outline),
+    //         onPressed: () {},
+    //       ),
+    //       title: cartItems[index].name.text.make(),
+    //     );
+    //   },
+    //   itemCount: _cart.items?.length ?? 0,
+    // );
   }
 }

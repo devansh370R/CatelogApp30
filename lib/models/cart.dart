@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_30days/models/catelog.dart';
 
 class CartModel {
+  static final cartModel = CartModel._internal();
+  CartModel._internal();
+  factory CartModel() => cartModel;
   late CatelogModel _catelog;
   final List<int> _itemIds = [];
 
@@ -11,19 +15,18 @@ class CartModel {
     _catelog = newCatelogModel;
   }
 
-  Iterable<ItemClass> get items =>
-      _itemIds.map((id) => _catelog.getById(id)).toList();
+  Iterable<ItemClass> get items {
+    return _itemIds.map((id) => _catelog.getById(id)).toList();
+  }
 
   num get totalPrice =>
       items.fold(0.0, (total, current) => total + current.price);
 
   void add(ItemClass item) {
-    final List<num> _itemIds = [];
-    _itemIds.add(item.id);
+    _itemIds.add(item.id as int);
   }
 
   void remove(ItemClass item) {
-    final List<num> _itemIds = [];
     _itemIds.remove(item.id);
   }
 }
