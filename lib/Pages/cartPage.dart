@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_30days/core/store.dart';
 import 'package:flutter_30days/models/cart.dart';
+import 'package:flutter_30days/models/catelog.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CartPage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _CartPageState extends State<CartPage> {
       ),
       body: Column(
         children: [
-          const _CartList().p32().expand(),
+          _CartList().p32().expand(),
           const Divider(),
           const _CartTotal(),
         ],
@@ -34,14 +35,18 @@ class _CartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _cart = CartModel();
+    final CartModel _cart = (VxState.store as MyStore).cart;
     return SizedBox(
       height: 200,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$${_cart.totalPrice}".text.xl4.make(),
-          30.widthBox,
+          VxConsumer(
+            builder: (context, dynamic _, VxStatus? status) =>
+                "\$${_cart.totalPrice}".text.xl4.make(),
+            mutations: {RemoveMutation},
+            notifications: {},
+          ),
           ElevatedButton(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -58,19 +63,13 @@ class _CartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  const _CartList({super.key});
-
-  @override
-  State<_CartList> createState() => __CartListState();
-}
-
-class __CartListState extends State<_CartList> {
-  final _cart = CartModel();
-
+class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final cartItems = _cart.items;
+    VxState.watch(context, on: [RemoveMutation]);
+    final CartModel _cart = (VxState.store as MyStore).cart;
+    final Iterable<ItemClass> cartItems = _cart.items;
+
     return _cart.items.isEmpty
         ? "Nothing To Show".text.xl3.makeCentered()
         : ListView.builder(
@@ -82,13 +81,12 @@ class __CartListState extends State<_CartList> {
                 trailing: IconButton(
                   icon: Icon(Icons.remove_circle_outline_outlined),
                   onPressed: () {
-                    _cart.remove(_cart.items.elementAt(index));
-                    setState(() {});
+                    RemoveMutation(_cart.items.elementAt(index));
                   },
                 ),
               );
             },
-            itemCount: _cart.items?.length ?? 0,
+            itemCount: _cart.items.length,
           );
     // return ListView.builder(
     //   itemBuilder: (context, index) {

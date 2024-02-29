@@ -29,9 +29,6 @@ class ItemClass {
 }
 
 class CatelogModel {
-  static final catelog = CatelogModel._internal();
-  CatelogModel._internal();
-  factory CatelogModel() => catelog;
   late CatelogModel _catelog;
 
   static List<ItemClass> items = [];
