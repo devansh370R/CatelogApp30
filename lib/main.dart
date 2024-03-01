@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: MyRoutes.cartPageRoute,
+      initialRoute: MyRoutes.loginRoute,
       routes: {
         "/": (context) => const LoginPage(),
         MyRoutes.homeRoute: (context) => const HomePage(),

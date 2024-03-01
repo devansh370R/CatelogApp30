@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_30days/Pages/addToCart.dart';
@@ -41,18 +42,20 @@ class HomeDetailPage extends StatelessWidget {
                 child: Container(
                   width: context.screenWidth,
                   color: Colors.white,
-                  child: Column(
-                    children: [
-                      catelog.name.text.bold.xl3.make(),
-                      catelog.desc.text.textStyle(context.captionStyle).make(),
-                      10.heightBox,
-                      "Apple mobile devices, such as the iPhone and iPad, are known for their premium design, seamless integration, and user-friendly experience. Powered by the iOS operating system, these devices feature a high-performance A-series chip, advanced camera systems, and biometric authentication (Touch ID or Face ID). Apple's commitment to accessibility, sustainability, and constant innovation makes their mobile devices a popular choice for a comprehensive and cohesive digital experience."
-                          .text
-                          .textStyle(context.captionStyle)
-                          .make()
-                          .p16()
-                    ],
-                  ).py32(),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        catelog.name.text.bold.xl3.make(),
+                        catelog.desc.text
+                            .textStyle(context.captionStyle)
+                            .make(),
+                        10.heightBox,
+                        catelog.info.text
+                            .textStyle(context.captionStyle)
+                            .make(),
+                      ],
+                    ).py32(),
+                  ),
                 ),
               ))
             ],

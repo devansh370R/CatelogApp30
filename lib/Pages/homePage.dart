@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_30days/Pages/addToCart.dart';
 import 'package:flutter_30days/Pages/homeDetailPage.dart';
+import 'package:flutter_30days/core/store.dart';
 import 'package:flutter_30days/models/cart.dart';
 import 'package:flutter_30days/models/catelog.dart';
 import 'package:flutter_30days/utiles/myRoutes.dart';
@@ -21,6 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final url = "";
   @override
   void initState() {
     // TODO: implement initState
@@ -50,27 +52,35 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore).cart;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, MyRoutes.cartPageRoute);
-        },
-        backgroundColor: Color.fromARGB(255, 15, 17, 19),
-        child: Icon(
-          CupertinoIcons.cart,
-          color: Colors.white,
-        ),
+      resizeToAvoidBottomInset: false,
+      floatingActionButton: VxBuilder(
+        mutations: const {AddMutation, RemoveMutation},
+        builder: (context, dynamic_, VxStatus? status) => FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, MyRoutes.cartPageRoute);
+          },
+          backgroundColor: const Color.fromARGB(255, 15, 17, 19),
+          child: const Icon(
+            CupertinoIcons.cart,
+            color: Colors.white,
+          ),
+        ).badge(
+            size: 20,
+            count: _cart.items.length,
+            textStyle: TextStyle(color: Colors.black)),
       ),
       backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: Container(
-          padding: Vx.m24,
+          padding: Vx.m16,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CatalogHeader(),
-              if (CatelogModel.items != null && CatelogModel.items.isNotEmpty)
-                const CatelogList().p16().expand()
+              if (CatelogModel.items.isNotEmpty)
+                const CatelogList().p12().expand()
               else
                 CircularProgressIndicator().centered().expand()
             ],
@@ -118,8 +128,11 @@ class CatelogList extends StatelessWidget {
                   builder: (context) => HomeDetailPage(catelog: catelog),
                 ));
           },
-          child: CatelogItem(
-            catelog: catelog,
+          child: Container(
+            height: 170,
+            child: CatelogItem(
+              catelog: catelog,
+            ),
           ),
         );
       },

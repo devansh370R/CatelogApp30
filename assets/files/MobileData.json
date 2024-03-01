@@ -4,6 +4,7 @@
             "id": 1001,
             "name": "Samsung Mobile",
             "description": "High-performance Samsung mobile with advanced features.",
+            "info": "The Samsung Galaxy S21 Ultra is a flagship smartphone that excels in camera performance, featuring a powerful 108MP quad-camera system with 100x Space Zoom. Its 6.8-inch Dynamic AMOLED display offers stunning visuals, complemented by a high-refresh rate for smooth interactions. With a top-tier processor, ample RAM, and long-lasting battery, it delivers seamless performance. The device boasts a premium design, S Pen compatibility, enhanced security features, and 5G connectivity, making it a versatile choice for tech enthusiasts and professionals seeking top-notch functionality and style. ",
             "price": 30000,
             "url": "https://images.samsung.com/is/image/samsung/p6pim/ie/sm-a135flbveub/gallery/ie-galaxy-a13-sm-a135-sm-a135flbveub-531736054?$650_519_PNG$"
         },
@@ -11,6 +12,7 @@
             "id": 1002,
             "name": "Apple Mobile",
             "description": "Premium Apple mobile known for its sleek design and top-notch technology.",
+            "info": "The Apple iPhone, synonymous with innovation and elegance, offers a seamless blend of cutting-edge technology and sleek design. With features like a high-quality camera system, intuitive user interface, and robust performance, the iPhone stands as a symbol of sophistication and functionality in the mobile world. Its integration with the Apple ecosystem, coupled with regular software updates, ensures a premium user experience. Whether capturing moments, staying productive, or enjoying multimedia, the iPhone remains a benchmark for excellence in the smartphone industry.",
             "price": 40000,
             "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWSfb0LYeRM0JqVDuMiqqOYOaLrnHp4cTLojhSC5Rwe5ZhcQzhvfDOudepHLa0bf3t47Q&usqp=CAU"
         },
@@ -18,6 +20,7 @@
             "id": 1003,
             "name": "LG Mobile",
             "description": "Feature-rich LG mobile with a stylish design and impressive specifications.",
+            "info": "The LG mobile, known for its innovation and user-centric features, combines advanced technology with a sleek design. With a focus on unique functionalities, LG smartphones offer impressive camera capabilities, vibrant displays, and reliable performance. The devices often showcase distinctive features like dual screens or advanced audio enhancements, providing users with a unique mobile experience. LG's commitment to pushing boundaries in design and technology makes their smartphones stand out in the competitive market, offering a blend of style and innovation for users seeking something different.",
             "price": 20000,
             "url": "https://images.hindustantimes.com/tech/htmobile4/P35728/images/Design/142848-v3-lg-w41-mobile-phone-large-5.jpg"
         },
@@ -25,6 +28,7 @@
             "id": 1004,
             "name": "MI Mobile",
             "description": "Budget-friendly MI mobile offering great value for money.",
+            "info": "MI (Xiaomi) mobiles are renowned for offering high-quality features at affordable prices. With a focus on performance, MI smartphones often boast powerful processors, impressive camera setups, and long-lasting batteries. The MIUI interface provides a user-friendly experience, and the devices frequently support innovative technologies such as fast charging and high-refresh-rate displays. MI smartphones cater to a wide range of users, delivering excellent value for money and cutting-edge features that make them popular choices in the competitive smartphone market.",
             "price": 10000,
             "url": "https://images.hindustantimes.com/tech/rf/image_size_960x540/HT/p2/2019/12/16/Pictures/_1cfe38f6-1fff-11ea-95dc-bf2b3eebb1f0.jpg"
         },
@@ -32,6 +36,7 @@
             "id": 1005,
             "name": "Google Pixel",
             "description": "Google's flagship Pixel mobile with an exceptional camera and pure Android experience.",
+            "info": "Google Pixel smartphones exemplify a pure Android experience with seamless integration of software and hardware. Known for their exceptional camera performance, Pixel devices capture stunning photos in any lighting condition. The emphasis on artificial intelligence and Google Assistant integration enhances user convenience. With timely software updates, a clean user interface, and features like Night Sight, Pixel phones offer a premium Android experience for those seeking a cohesive blend of cutting-edge technology and simplicity.",
             "price": 45000,
             "url": "https://d25-a.sdn.cz/d_25/c_img_gV_c/1UNUkb.jpeg?fl=res%2C350%2C350%2C1%7Cwebp%2C80"
         },
@@ -39,6 +44,7 @@
             "id": 1006,
             "name": "OnePlus Mobile",
             "description": "OnePlus mobile known for its powerful performance and fast charging capabilities.",
+            "info": "OnePlus smartphones are synonymous with flagship-level performance and a premium user experience. Renowned for their powerful processors, high refresh rate displays, and fast charging capabilities, OnePlus devices cater to tech enthusiasts. The OxygenOS interface provides a clean and customizable user experience, and the devices often feature sleek designs with quality build materials. With a reputation for delivering top-tier specifications at competitive prices, OnePlus remains a popular choice for users who prioritize performance and innovation in their smartphones.",
             "price": 35000,
             "url": "https://th.bing.com/th/id/OIP.dJfwYledi1mRJzifCm338QAAAA?rs=1&pid=ImgDetMain"
         },
@@ -46,6 +52,7 @@
             "id": 1007,
             "name": "Huawei Mobile",
             "description": "Huawei mobile with innovative features and stylish design.",
+            "info": "Huawei mobiles showcase cutting-edge technology and innovative features. Known for their powerful camera systems, robust performance, and sleek designs, Huawei smartphones offer a premium experience. The EMUI interface provides a customizable and user-friendly environment, and devices often incorporate advanced technologies like Leica optics and fast-charging capabilities. Huawei's commitment to technological advancement positions its mobiles as reliable choices for users seeking a blend of high-performance hardware and sophisticated design.",
             "price": 28000,
             "url": "https://http2.mlstatic.com/D_NQ_NP_780521-MLU41958632883_052020-F.jpg"
         }

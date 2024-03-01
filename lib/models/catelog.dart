@@ -2,6 +2,7 @@ class ItemClass {
   final num id;
   final String name;
   final String desc;
+  final String info;
   final num price;
   final String url;
 
@@ -9,6 +10,7 @@ class ItemClass {
       {required this.id,
       required this.name,
       required this.desc,
+      required this.info,
       required this.price,
       required this.url});
 
@@ -16,6 +18,7 @@ class ItemClass {
         id: map["id"],
         name: map["name"],
         desc: map["description"],
+        info: map["info"],
         price: map["price"],
         url: map["url"],
       );
@@ -23,6 +26,7 @@ class ItemClass {
         "id": id,
         "name": name,
         "description": desc,
+        "info": info,
         "price": price,
         "url": url,
       };
